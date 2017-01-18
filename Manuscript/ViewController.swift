@@ -12,16 +12,17 @@ class ViewController: NSViewController {
     
     @IBOutlet var textView: NSView!
     var win: NSWindow!
-    @IBOutlet var textField: NSTextField!
-    
+    var textField = NSTextField(frame: NSMakeRect(20,20,410,260))
          override func viewWillAppear() {
+            view.addSubview(textField)
             win = self.view.window!
             _ = self.view.window?.windowController
-            
+            self.view.wantsLayer = true
             win.titlebarAppearsTransparent = true
             win.isMovableByWindowBackground = true
-            win.title = ""
+            win.titleVisibility = NSWindowTitleVisibility.hidden
             win.backgroundColor = C.editorBackground
+            view.layer?.cornerRadius = 10.0
             textField.isEditable = true
             textField.placeholderString = "Thoughts💤☁️"
             textField.focusRingType = .none
@@ -33,11 +34,12 @@ class ViewController: NSViewController {
     }
     
     func setDarkMode() {
+        win.becomeMain()
         win.backgroundColor = C.colorDark
         textField.backgroundColor = C.colorDark
         textField.textColor = C.colorLight
-        
     }
+    
         override func viewDidAppear() {
         }
  
