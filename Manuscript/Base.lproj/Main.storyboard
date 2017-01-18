@@ -689,8 +689,8 @@
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBZ-R2-V4W">
                                 <rect key="frame" x="18" y="20" width="414" height="260"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" controlSize="mini" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="" id="BPs-ai-hU6">
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                <textFieldCell key="cell" controlSize="mini" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" userInterfaceLayoutDirection="rightToLeft" alignment="left" placeholderString="" id="BPs-ai-hU6">
                                     <font key="font" size="17" name="Avenir-Medium"/>
                                     <color key="textColor" red="0.33502671632124348" green="0.33502671632124348" blue="0.33502671632124348" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

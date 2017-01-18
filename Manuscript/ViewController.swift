@@ -12,6 +12,8 @@ class ViewController: NSViewController {
     
     @IBOutlet var textView: NSView!
     var win: NSWindow!
+    var document: Document!
+    var allText = NSAttributedString()
     var textField = NSTextField(frame: NSMakeRect(20,20,410,260))
          override func viewWillAppear() {
             view.addSubview(textField)
@@ -24,8 +26,15 @@ class ViewController: NSViewController {
             win.backgroundColor = C.editorBackground
             view.layer?.cornerRadius = 10.0
             textField.isEditable = true
-            textField.placeholderString = "Thoughts💤☁️"
+            textField.placeholderString = "“If there's a book that you want to read, but it hasn't been written yet, then you must write it.” 💭"
             textField.focusRingType = .none
+            win.isOpaque = false
+            let appearance = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") ?? "Light"
+            if appearance == "Dark" {
+                setDarkMode()
+            } else {
+                setLightMode()
+            }
         }
     
     func setLightMode() {
@@ -38,6 +47,7 @@ class ViewController: NSViewController {
         win.backgroundColor = C.colorDark
         textField.backgroundColor = C.colorDark
         textField.textColor = C.colorLight
+        textField.placeholderAttributedString = NSAttributedString(string: "I have a dream... 🔦", attributes: [NSForegroundColorAttributeName: C.colorLight]) 
     }
     
         override func viewDidAppear() {

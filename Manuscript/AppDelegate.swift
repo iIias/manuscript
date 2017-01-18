@@ -14,7 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let menu: NSMenu = NSMenu()
     let modesMenu: NSMenu = NSMenu(title: "Modes")
     let statusItem = NSStatusBar.system().statusItem(withLength: -2)
-
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         
