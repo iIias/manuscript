@@ -13,7 +13,7 @@ class ViewController: NSViewController {
     @IBOutlet var textView: NSView!
     var win: NSWindow!
     var document: Document!
-    var allText = NSAttributedString()
+    var placeholder: String = "“If there's a book that you want to read, but it hasn't been written yet, then you must write it.” 💭"
     var textField = NSTextField(frame: NSMakeRect(20,20,410,260))
          override func viewWillAppear() {
             view.addSubview(textField)
@@ -26,7 +26,7 @@ class ViewController: NSViewController {
             win.backgroundColor = C.editorBackground
             view.layer?.cornerRadius = 10.0
             textField.isEditable = true
-            textField.placeholderString = "“If there's a book that you want to read, but it hasn't been written yet, then you must write it.” 💭"
+            textField.placeholderString = placeholder
             textField.focusRingType = .none
             win.isOpaque = false
             let appearance = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") ?? "Light"
@@ -40,6 +40,13 @@ class ViewController: NSViewController {
     func setLightMode() {
         win.backgroundColor = C.editorBackground
         textField.backgroundColor = C.editorBackground
+        textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.font!])
+    }
+    
+    func openFile() {
+        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as NSURL
+        let allText = textField.stringValue
+        let fileUrl = documentsUrl.appendingPathComponent("foo.txt")
     }
     
     func setDarkMode() {
@@ -47,7 +54,7 @@ class ViewController: NSViewController {
         win.backgroundColor = C.colorDark
         textField.backgroundColor = C.colorDark
         textField.textColor = C.colorLight
-        textField.placeholderAttributedString = NSAttributedString(string: "I have a dream... 🔦", attributes: [NSForegroundColorAttributeName: C.colorLight]) 
+        textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: C.colorLight,NSFontAttributeName: C.font!])
     }
     
         override func viewDidAppear() {

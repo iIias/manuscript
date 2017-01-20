@@ -10,15 +10,18 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
+    
     let menu: NSMenu = NSMenu()
-    let modesMenu: NSMenu = NSMenu(title: "Modes")
+    let modesMenu: NSMenu = NSMenu(title: "Modes 🔥")
+    let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     let statusItem = NSStatusBar.system().statusItem(withLength: -2)
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         
-        let modesItem = NSMenuItem(title: "Modes", action: #selector(self.noFunction), keyEquivalent: "")
+        let modesItem = NSMenuItem(title: "Modes 🔥", action: #selector(self.noFunction), keyEquivalent: "")
+        let openItem = NSMenuItem(title: "Open 📋", action: #selector(self.noFunction), keyEquivalent: "")
+        menu.addItem(openItem)
         menu.addItem(modesItem)
         modesMenu.addItem(NSMenuItem(title: "Light 💡", action: #selector(ViewController.setLightMode), keyEquivalent: ""))
         modesMenu.addItem(NSMenuItem(title: "Dark 🌑", action: #selector(ViewController.setDarkMode), keyEquivalent: ""))
