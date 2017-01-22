@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Foundation
 
 class ViewController: NSViewController {
     
@@ -43,12 +44,6 @@ class ViewController: NSViewController {
         textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.font!])
     }
     
-    func openFile() {
-        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as NSURL
-        let allText = textField.stringValue
-        let fileUrl = documentsUrl.appendingPathComponent("foo.txt")
-    }
-    
     func setDarkMode() {
         win.becomeMain()
         win.backgroundColor = C.colorDark
@@ -56,6 +51,23 @@ class ViewController: NSViewController {
         textField.textColor = C.colorLight
         textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: C.colorLight,NSFontAttributeName: C.font!])
     }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    func saveTextToDocuments() {
+        let filename = "manuscript.txt"
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+        let path: URL = dir.appendingPathComponent(filename)
+        let str: String = textField.stringValue
+        do {
+            try str.write(to: path, atomically: false, encoding: String.Encoding.utf8)
+        } catch {
+            print("failed to write file")
+        }  }  }
     
         override func viewDidAppear() {
         }
