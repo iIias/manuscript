@@ -23,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let modesItem = NSMenuItem(title: "🔥 Modes", action: #selector(self.noFunction), keyEquivalent: "")
         let saveItem = NSMenuItem(title: "💾 Save", action: #selector(ViewController.saveTextToDocuments), keyEquivalent: "")
         menu.addItem(saveItem)
-        saveMenu.addItem(NSMenuItem(title: "📄 Documents", action: #selector(ViewController.saveTextToDocuments), keyEquivalent: ""))
+        saveMenu.addItem(NSMenuItem(title: "📄 Documents", action: #selector(ViewController.saveTextToDocuments), keyEquivalent: "s"))
         saveMenu.addItem(NSMenuItem(title: "🏠 Desktop", action: #selector(ViewController.saveTextToDocuments), keyEquivalent: ""))
         menu.addItem(NSMenuItem.separator())
         menu.addItem(modesItem)
