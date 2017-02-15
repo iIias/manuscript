@@ -24,11 +24,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let saveItem = NSMenuItem(title: "💾 Save", action: #selector(ViewController.saveTextToDocuments), keyEquivalent: "")
         menu.addItem(saveItem)
         saveMenu.addItem(NSMenuItem(title: "📄 Documents", action: #selector(ViewController.saveTextToDocuments), keyEquivalent: "s"))
-        saveMenu.addItem(NSMenuItem(title: "🏠 Desktop", action: #selector(ViewController.saveTextToDocuments), keyEquivalent: ""))
+        saveMenu.addItem(NSMenuItem(title: "🏠 Desktop", action: #selector(ViewController.saveTextToDesktop), keyEquivalent: ""))
         menu.addItem(NSMenuItem.separator())
         menu.addItem(modesItem)
         modesMenu.addItem(NSMenuItem(title: "Light 💡", action: #selector(ViewController.setLightMode), keyEquivalent: ""))
         modesMenu.addItem(NSMenuItem(title: "Dark 🌑", action: #selector(ViewController.setDarkMode), keyEquivalent: ""))
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(NSMenuItem(title: "❌ Quit", action: #selector(NSApp.terminate(_:)), keyEquivalent: ""))
         modesItem.submenu = modesMenu
         saveItem.submenu = saveMenu
         

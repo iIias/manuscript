@@ -15,7 +15,7 @@ class ViewController: NSViewController {
     var win: NSWindow!
     var document: Document!
     var placeholder: String = "Insert random quote here"
-    var textField = NSTextField(frame: NSMakeRect(20,20,410,260))
+    var textField = NSTextField()
          override func viewWillAppear() {
             //: NSWindow setup
             view.addSubview(textField)
@@ -66,6 +66,18 @@ class ViewController: NSViewController {
         } catch {
             print("failed to write file")
         }  }  }
+    
+    func saveTextToDesktop() {
+        // Take textField.stringValue, encode & save to file
+        let filename = "manuscript.txt"
+        if let dir = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).first {
+            let path: URL = dir.appendingPathComponent(filename)
+            let str: String = textField.stringValue
+            do {
+                try str.write(to: path, atomically: false, encoding: String.Encoding.utf8)
+            } catch {
+                print("failed to write file")
+            }  }  }
     
         override func viewDidAppear() {
         }
