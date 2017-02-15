@@ -13,7 +13,6 @@ class ViewController: NSViewController {
     
     @IBOutlet var textView: NSView!
     var win: NSWindow!
-    var document: Document!
     var placeholder: String = "Insert random quote here"
     var textField = NSTextField()
          override func viewWillAppear() {
