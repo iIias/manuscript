@@ -9,18 +9,21 @@
 import Cocoa
 
 @NSApplicationMain
+
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-      let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+
     }
     
     
     func noFunction() {
         print("nothing")
     }
+    
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application

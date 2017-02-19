@@ -14,22 +14,25 @@ class ViewController: NSViewController {
     @IBOutlet var textView: NSView!
     var win: NSWindow!
     var placeholder: String = "Insert random quote here"
-    var textField = NSTextField()
+    @IBOutlet weak var textField: NSTextField!
+    @IBOutlet weak var titleField: NSTextField!
+    
          override func viewWillAppear() {
             //: NSWindow setup
             view.addSubview(textField)
-            win = self.view.window!
-            _ = self.view.window?.windowController
+            win = view.window
             self.view.wantsLayer = true
             win.titlebarAppearsTransparent = true
             win.isMovableByWindowBackground = true
             win.titleVisibility = NSWindowTitleVisibility.hidden
-            win.backgroundColor = C.editorBackground
+            win.backgroundColor = C.colorLight
             view.layer?.cornerRadius = 10.0
             textField.isEditable = true
             textField.placeholderString = placeholder
             textField.focusRingType = .none
+            titleField.focusRingType = .none
             win.isOpaque = false
+
             //: check if macOS is in dark mode or not
             let appearance = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") ?? "Light"
             if appearance == "Dark" {
@@ -43,6 +46,7 @@ class ViewController: NSViewController {
         //: set colors to light
         win.backgroundColor = C.editorBackground
         textField.backgroundColor = C.editorBackground
+        titleField.placeholderAttributedString = NSAttributedString(string: "Title", attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.titleFont!])
         textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.font!])
     }
     
@@ -64,19 +68,10 @@ class ViewController: NSViewController {
             try str.write(to: path, atomically: false, encoding: String.Encoding.utf8)
         } catch {
             print("failed to write file")
-        }  }  }
+                }
+            }
+        }
     
-    func saveTextToDesktop() {
-        // Take textField.stringValue, encode & save to file
-        let filename = "manuscript.txt"
-        if let dir = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).first {
-            let path: URL = dir.appendingPathComponent(filename)
-            let str: String = textField.stringValue
-            do {
-                try str.write(to: path, atomically: false, encoding: String.Encoding.utf8)
-            } catch {
-                print("failed to write file")
-            }  }  }
     
         override func viewDidAppear() {
         }
@@ -86,6 +81,6 @@ class ViewController: NSViewController {
             textField.becomeFirstResponder()
         }
     
-        
+    
 }
 

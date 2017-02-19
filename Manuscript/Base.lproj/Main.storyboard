@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E144f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E154a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
@@ -581,8 +581,17 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Modes" id="hdb-YX-sih">
                                                 <items>
-                                                    <menuItem title="Item" id="m4A-K9-b6A">
+                                                    <menuItem title="Light 💡" id="m4A-K9-b6A">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="setLightMode:" target="Voe-Tx-rLC" id="eNd-9m-0tE"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Dark 🌚" id="HJ4-IL-bDV">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="setDarkMode:" target="Voe-Tx-rLC" id="Cd5-eA-fsJ"/>
+                                                        </connections>
                                                     </menuItem>
                                                 </items>
                                             </menu>
@@ -655,7 +664,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="236"/>
+            <point key="canvasLocation" x="90" y="331"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -667,19 +676,29 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBZ-R2-V4W">
-                                <rect key="frame" x="18" y="20" width="414" height="260"/>
+                                <rect key="frame" x="18" y="22" width="414" height="232"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <textFieldCell key="cell" controlSize="mini" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" userInterfaceLayoutDirection="rightToLeft" alignment="left" placeholderString="" id="BPs-ai-hU6">
+                                <textFieldCell key="cell" controlSize="mini" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="" id="BPs-ai-hU6">
                                     <font key="font" size="17" name="Avenir-Medium"/>
                                     <color key="textColor" red="0.33502671632124348" green="0.33502671632124348" blue="0.33502671632124348" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sY8-ox-SA3">
+                                <rect key="frame" x="18" y="259" width="414" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" controlSize="mini" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" alignment="left" placeholderString="" id="u9X-x1-mxD">
+                                    <font key="font" size="20" name="Avenir-Heavy"/>
+                                    <color key="textColor" red="0.46678675518134716" green="0.46678675518134716" blue="0.46678675518134716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                         </subviews>
                     </customView>
                     <connections>
-                        <outlet property="textField" destination="qBZ-R2-V4W" id="Bgh-aq-hJg"/>
+                        <outlet property="textField" destination="qBZ-R2-V4W" id="kwg-6T-R7v"/>
                         <outlet property="textView" destination="LNi-rG-TDf" id="gUZ-Qh-qhK"/>
+                        <outlet property="titleField" destination="sY8-ox-SA3" id="Qdg-k8-UNK"/>
                     </connections>
                 </viewController>
             </objects>
