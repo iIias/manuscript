@@ -678,7 +678,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" controlSize="mini" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" alignment="left" placeholderString="" id="u9X-x1-mxD">
                                     <font key="font" size="20" name="Avenir-Heavy"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.64647425518134716" green="0.64647425518134716" blue="0.64647425518134716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
