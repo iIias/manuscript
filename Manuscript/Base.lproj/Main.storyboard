@@ -577,25 +577,6 @@
                                                 </items>
                                             </menu>
                                         </menuItem>
-                                        <menuItem title="Modes" id="a7z-zv-Gja">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Modes" id="hdb-YX-sih">
-                                                <items>
-                                                    <menuItem title="Light 💡" id="m4A-K9-b6A">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                        <connections>
-                                                            <action selector="setLightMode:" target="Voe-Tx-rLC" id="eNd-9m-0tE"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                    <menuItem title="Dark 🌚" id="HJ4-IL-bDV">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                        <connections>
-                                                            <action selector="setDarkMode:" target="Voe-Tx-rLC" id="Cd5-eA-fsJ"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                </items>
-                                            </menu>
-                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -642,10 +623,18 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Manuscript" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Manuscript" customModuleProvider="target">
+                    <connections>
+                        <outlet property="fileMenu" destination="bib-Uj-vzu" id="VZ1-Pn-fzb"/>
+                        <outlet property="mainMenu" destination="AYu-sK-qS6" id="exv-eP-0kP"/>
+                        <outlet property="menu" destination="AYu-sK-qS6" id="fgn-zn-zJO"/>
+                        <outlet property="styleMenu" destination="GEO-Iw-cKr" id="Pqh-WU-lYC"/>
+                        <outlet property="windowMenu" destination="Td7-aD-5lo" id="VW5-ia-uYR"/>
+                    </connections>
+                </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="99" y="34"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -689,7 +678,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" controlSize="mini" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" alignment="left" placeholderString="" id="u9X-x1-mxD">
                                     <font key="font" size="20" name="Avenir-Heavy"/>
-                                    <color key="textColor" red="0.46678675518134716" green="0.46678675518134716" blue="0.46678675518134716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
