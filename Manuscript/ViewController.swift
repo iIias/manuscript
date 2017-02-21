@@ -9,14 +9,12 @@
 import Cocoa
 import Foundation
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, NSTextFieldDelegate {
     
     @IBOutlet var textView: NSView!
     var win: NSWindow!
-    var titlePlaceholder: String = "Title"
     var placeholder: String = "Insert random quote here"
     @IBOutlet weak var textField: NSTextField!
-    @IBOutlet weak var titleField: NSTextField!
     
          override func viewWillAppear() {
             //: NSWindow setup
@@ -31,11 +29,12 @@ class ViewController: NSViewController {
             textField.isEditable = true
             textField.placeholderString = placeholder
             textField.focusRingType = .none
-            titleField.focusRingType = .none
             win.isOpaque = false
-
+            
             //: check whether macOS is in dark mode or nah
             let appearance = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") ?? "Light"
+            dump(appearance)
+            print("Manuscript has been set to \(appearance) 🔥")
             if appearance == "Dark" {
                 setDarkMode()
             } else {
@@ -47,7 +46,7 @@ class ViewController: NSViewController {
         //: set colors to light
         win.backgroundColor = C.colorLight
         textField.backgroundColor = C.colorLight
-        titleField.placeholderAttributedString = NSAttributedString(string: titlePlaceholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.titleFont!])
+        textField.textColor = NSColor.gray
         textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.font!])
     }
     
@@ -56,11 +55,10 @@ class ViewController: NSViewController {
         win.backgroundColor = NSColor.black
         textField.backgroundColor = NSColor.black
         textField.textColor = C.colorLight
-        titleField.placeholderAttributedString = NSAttributedString(string: titlePlaceholder, attributes: [NSForegroundColorAttributeName: NSColor.lightGray
-            ,NSFontAttributeName: C.titleFont!])
         textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.lightGray ,NSFontAttributeName: C.font!])
     }
     
+
     func saveTextToDocuments() {
         // Take textField.stringValue, encode & save to file
         let filename = "manuscript.txt"
@@ -72,7 +70,7 @@ class ViewController: NSViewController {
         } catch {
             print("failed to write file")
                 }
-            }
+           }
         }
     
     
@@ -81,9 +79,15 @@ class ViewController: NSViewController {
  
         override func viewDidLoad() {
             super.viewDidLoad()
-            textField.becomeFirstResponder()
-        }
+            print("View did load! 🌇")
+            textField.delegate = self
+            let notificationCenter = NotificationCenter.default
+            notificationCenter.addObserver(self, selector: #selector(ViewController.textDidChange), name: NSNotification.Name.NSTextDidChange, object:textField)
+    }
     
-
+    
+    func textDidChange(notificationCenter: NSNotification) {
+        print("test")
+    }
+    
 }
-
