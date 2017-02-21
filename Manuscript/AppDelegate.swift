@@ -19,19 +19,36 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextDelegate, NSTextFieldD
     @IBOutlet weak var styleMenu: NSMenu!
     @IBOutlet weak var windowMenu: NSMenu!
     @IBOutlet weak var helpMenu: NSMenu!
-    let testDummie = NSMenuItem(title: "info", action: #selector(noFunction), keyEquivalent: "")
+    let defaults = UserDefaults.standard
     let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Initialize application
         styleMenu.addItem(NSMenuItem(title: "Light 💡", action: #selector(ViewController().setLightMode), keyEquivalent: ""))
         styleMenu.addItem(NSMenuItem(title: "Dark 🌚", action: #selector(ViewController().setDarkMode), keyEquivalent: ""))
-        styleMenu.addItem(NSMenuItem(title: "Emojis", action: #selector(ViewController().toggleEmojis), keyEquivalent: ""))
-        styleMenu.addItem(testDummie)
+        styleMenu.addItem(NSMenuItem(title: "Emojis 😉", action: #selector(toggleEmojis), keyEquivalent: ""))
     }
     
     func noFunction() {
         print("nothing")
+    }
+    
+    func toggleEmojis() {
+        if defaults.string(forKey: "menubarStyle") == "emoji" {
+            defaults.set("standard", forKey: "menubarStyle")
+            self.fileMenu.title = "File"
+            self.editMenu.title = "Edit"
+            self.styleMenu.title = "Style"
+            self.windowMenu.title = "Window"
+            self.helpMenu.title = "Help"
+        } else /*if defaults.string(forKey: "menubarStyle") == "emoji"*/ {
+            self.defaults.set("emoji", forKey: "menubarStyle")
+            self.fileMenu.title = "📄"
+            self.editMenu.title = "✍️"
+            self.styleMenu.title = "🔥"
+            self.windowMenu.title = "🖼"
+            self.helpMenu.title = "🤦‍♂️"
+        }
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

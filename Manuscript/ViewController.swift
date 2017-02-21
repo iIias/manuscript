@@ -57,7 +57,6 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         textField.textColor = C.colorLight
         textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.lightGray ,NSFontAttributeName: C.font!])
     }
-    
 
     func saveTextToDocuments() {
         // Take textField.stringValue, encode & save to file
