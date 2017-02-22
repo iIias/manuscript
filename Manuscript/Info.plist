@@ -12,15 +12,17 @@
 				<string>txt</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>DocumentType</string>
+			<string>Manuscript</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array/>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSItemContentTypes</key>
-			<array/>
+			<array>
+				<string>tools.manuscript.writer</string>
+			</array>
 			<key>LSTypeIsPackage</key>
-			<integer>1</integer>
+			<integer>0</integer>
 			<key>NSDocumentClass</key>
 			<string>$(PRODUCT_MODULE_NAME).Document</string>
 		</dict>
