@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import Foundation
 
 class ViewController: NSViewController, NSTextFieldDelegate {
     
@@ -18,14 +17,16 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     
          override func viewWillAppear() {
             //: NSWindow setup
-            view.addSubview(textField)
-            win = view.window
-            self.view.wantsLayer = true
+            win = self.textView.window!
+            let winController = self.view.window?.windowController
+ //           let document: Document = winController!.document as! Document
+            textView.addSubview(textField)
+            self.textView.wantsLayer = true
             win.titlebarAppearsTransparent = true
             win.isMovableByWindowBackground = true
             win.titleVisibility = NSWindowTitleVisibility.hidden
             win.backgroundColor = C.colorLight
-            view.layer?.cornerRadius = 10.0
+            textView.layer?.cornerRadius = 10.0
             textField.isEditable = true
             textField.placeholderString = placeholder
             textField.focusRingType = .none
@@ -40,7 +41,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
             } else {
                 setLightMode()
             }
-        }
+            }
     
     func setLightMode() {
         //: set colors to light
@@ -57,29 +58,12 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         textField.textColor = C.colorLight
         textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.lightGray ,NSFontAttributeName: C.font!])
     }
-
-    func saveTextToDocuments() {
-        // Take textField.stringValue, encode & save to file
-        let filename = "manuscript.txt"
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-        let path: URL = dir.appendingPathComponent(filename)
-        let str: String = textField.stringValue
-        do {
-            try str.write(to: path, atomically: false, encoding: String.Encoding.utf8)
-        } catch {
-            print("failed to write file")
-                }
-           }
-        }
-    
-    
         override func viewDidAppear() {
         }
  
         override func viewDidLoad() {
             super.viewDidLoad()
             print("View did load! 🌇")
-            textField.delegate = self
             let notificationCenter = NotificationCenter.default
             notificationCenter.addObserver(self, selector: #selector(ViewController.textDidChange), name: NSNotification.Name.NSTextDidChange, object:textField)
     }
