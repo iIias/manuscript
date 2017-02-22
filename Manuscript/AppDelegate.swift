@@ -24,8 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextDelegate, NSTextFieldD
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Initialize application
-        styleMenu.addItem(NSMenuItem(title: "Light 💡", action: #selector(ViewController().setLightMode), keyEquivalent: ""))
-        styleMenu.addItem(NSMenuItem(title: "Dark 🌚", action: #selector(ViewController().setDarkMode), keyEquivalent: ""))
+        styleMenu.addItem(NSMenuItem(title: "Light 💡", action: #selector(noFunction), keyEquivalent: ""))
+        styleMenu.addItem(NSMenuItem(title: "Dark 🌚", action: #selector(noFunction), keyEquivalent: ""))
         styleMenu.addItem(NSMenuItem(title: "Emojis 😉", action: #selector(toggleEmojis), keyEquivalent: ""))
     }
     
