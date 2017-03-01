@@ -13,7 +13,7 @@ class Document: NSDocument {
     @IBOutlet var win: NSWindow!
     @IBOutlet weak var textField: NSTextField!
     var contents: String = ""
-    var placeholder: String = "trolololololololol"
+    var placeholderList: Array = ["Dream big, do bigger 💪", "If you can dream it, you can do it 👨‍🚀", "Writing is the painting for the voice 👩‍🎨"]
     
     override var windowNibName: String? {
         // Override returning the nib file name of the document
@@ -22,6 +22,9 @@ class Document: NSDocument {
     }
     
     override func windowControllerDidLoadNib(_ aController: NSWindowController) {
+        var placeholder: String
+        let randomInt: Int = Int(arc4random_uniform(3))
+        placeholder = placeholderList[randomInt]
         super.windowControllerDidLoadNib(aController)
         win.titlebarAppearsTransparent = true
         win.isMovableByWindowBackground = true
@@ -30,23 +33,22 @@ class Document: NSDocument {
         textField.isEditable = true
         textField.placeholderString = "Insert random quote"
         textField.focusRingType = .none
-        textField.placeholderAttributedString = NSAttributedString(string: Document().placeholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.font!])
+        textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.font!])
         win.isOpaque = false
         //: check whether macOS is in dark mode or nah
-        let appearance = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") ?? "Light"
-        dump("Manuscript appearance set to \(appearance) 🌇")
+        let appearance = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") ?? "Light"; dump("Manuscript appearance set to \(appearance) 🌇")
         if appearance == "Dark" {
             //: set colors to dark
             self.win.backgroundColor = NSColor.black
             self.textField.backgroundColor = NSColor.black
             self.textField.textColor = C.colorLight
-            self.textField.placeholderAttributedString = NSAttributedString(string: Document().placeholder, attributes: [NSForegroundColorAttributeName: NSColor.lightGray ,NSFontAttributeName: C.font!])
+            self.textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.lightGray ,NSFontAttributeName: C.font!])
         } else {
             //: set colors to light
             self.win.backgroundColor = C.colorLight
             self.textField.backgroundColor = C.colorLight
             self.textField.textColor = NSColor.gray
-            self.textField.placeholderAttributedString = NSAttributedString(string: Document().placeholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.font!])
+            self.textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.font!])
         }
     }
     
