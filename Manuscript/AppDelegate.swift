@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.swift
 //  Manuscript
@@ -7,10 +8,10 @@
 //
 
 import Cocoa
-
+import Foundation
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, NSTextDelegate, NSTextFieldDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var mainMenu: NSMenu!
     @IBOutlet weak var menu: NSMenu!
@@ -19,18 +20,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextDelegate, NSTextFieldD
     @IBOutlet weak var styleMenu: NSMenu!
     @IBOutlet weak var windowMenu: NSMenu!
     @IBOutlet weak var helpMenu: NSMenu!
+    
     let ud = UserDefaults.standard
-    let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Initialize application
-        styleMenu.addItem(NSMenuItem(title: "Light 💡", action: #selector(noFunction), keyEquivalent: ""))
-        styleMenu.addItem(NSMenuItem(title: "Dark 🌚", action: #selector(noFunction), keyEquivalent: ""))
-        styleMenu.addItem(NSMenuItem(title: "Emojis 😉", action: #selector(toggleEmojis), keyEquivalent: ""))
-    }
-    
-    func noFunction() {
-        print("nothing")
+        windowMenu.addItem(NSMenuItem(title: "👁 Toggle Titlebar", action: #selector(Document().toggleTitlebar), keyEquivalent: "T"))
+        windowMenu.addItem(NSMenuItem(title: "💡 Light", action: #selector(Document().setColorLight), keyEquivalent: "L"))
+        windowMenu.addItem(NSMenuItem(title: "🌚 Dark", action: #selector(Document().setColorDark), keyEquivalent: "N"))
+        windowMenu.addItem(NSMenuItem(title: "😉 Emojis", action: #selector(toggleEmojis), keyEquivalent: "E"))
     }
     
     func toggleEmojis() {

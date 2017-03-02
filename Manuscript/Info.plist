@@ -13,6 +13,10 @@
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Text</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>????</string>
+			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSItemContentTypes</key>
@@ -38,33 +42,37 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.productivity</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
-	<key>LSUIElement</key>
-	<false/>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2017 Ilias Ennmouri. All rights reserved.</string>
 	<key>NSMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>UTExportedTypeDeclarations</key>
+	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
+				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Text</string>
+			<string>Plain Text</string>
 			<key>UTTypeIdentifier</key>
-			<string>tools.manuscript.Text</string>
+			<string>kUTTypePlainText</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
 					<string>txt</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>text/plain</string>
 				</array>
 			</dict>
 		</dict>

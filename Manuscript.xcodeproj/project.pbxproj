@@ -16,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6829C4941E67805A006B00BD /* Manuscript.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Manuscript.entitlements; sourceTree = "<group>"; };
 		685A36D61E207241003D75A8 /* Manuscript.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Manuscript.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		685A36D91E207241003D75A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		685A36DD1E207241003D75A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -24,7 +25,6 @@
 		68C9574D1E59E1AF0051C646 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		68DDF5B31E5CBDC30000ED17 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		68DDF5B41E5CBDC30000ED17 /* Document.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Document.xib; sourceTree = "<group>"; };
-		68DDF5B71E5DD95B0000ED17 /* Manuscript.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Manuscript.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +57,7 @@
 		685A36D81E207241003D75A8 /* Manuscript */ = {
 			isa = PBXGroup;
 			children = (
-				68DDF5B71E5DD95B0000ED17 /* Manuscript.entitlements */,
+				6829C4941E67805A006B00BD /* Manuscript.entitlements */,
 				68DDF5B41E5CBDC30000ED17 /* Document.xib */,
 				68C9574C1E59E1AF0051C646 /* Main.storyboard */,
 				685A36D91E207241003D75A8 /* AppDelegate.swift */,
@@ -262,11 +262,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Manuscript/Manuscript.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = AUHLTS98UR;
 				INFOPLIST_FILE = Manuscript/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = one.ilias.Manuscript;
+				PRODUCT_BUNDLE_IDENTIFIER = tools.manuscript.writer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -277,11 +278,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Manuscript/Manuscript.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = AUHLTS98UR;
 				INFOPLIST_FILE = Manuscript/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = one.ilias.Manuscript;
+				PRODUCT_BUNDLE_IDENTIFIER = tools.manuscript.writer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
