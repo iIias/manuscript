@@ -11,7 +11,8 @@ import Cocoa
 class Document: NSDocument {
     
     @IBOutlet var win: NSWindow!
-    @IBOutlet weak var textField: NSTextField!
+    @IBOutlet weak var scrollView: NSScrollView!
+    @IBOutlet var textField: NSTextView!
     var contents: String = ""
     var placeholderList: Array = ["Dream big, do much bigger 💪", "If you can dream it, you can do it 👨‍🚀", "Writing is the painting for the voice 👩‍🎨", "It is uncomfortable to bear an untold story inside you ✍️"]
     var placeholder: String = ""
@@ -23,20 +24,14 @@ class Document: NSDocument {
     
     override func windowControllerDidLoadNib(_ aController: NSWindowController) {
         super.windowControllerDidLoadNib(aController)
-        if #available(OSX 10.12.2, *) {
-            textField.allowsCharacterPickerTouchBarItem = true
-        } else {
-            // Fallback on earlier versions
-        }
         placeholder = placeholderList[randomInt]
         win.titlebarAppearsTransparent = true
         win.isMovableByWindowBackground = true
         win.backgroundColor = C.colorLight
+        textField.font = C.font
         textField.translatesAutoresizingMaskIntoConstraints = true
-        textField.isEditable = true
-        textField.focusRingType = .none
-        textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.font!])
-        textField.stringValue = contents as String
+//        textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.font!])
+        textField.string = contents as String
         // Check whether macOS is set to dark or light
         let appearance = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") ?? "Light"; dump("Manuscript appearance set to \(appearance) 🌇")
         if appearance == "Dark" {
@@ -48,23 +43,18 @@ class Document: NSDocument {
         }
     }
     
-    @IBAction func textFieldAction(_ sender: NSTextField) {
-        self.textField.stringValue.append("\n")
-        self.textField?.selectAll(nil)
-    }
-    
     func setColorDark() {
         self.win.backgroundColor = NSColor.black
         self.textField.backgroundColor = NSColor.black
         self.textField.textColor = C.colorLight
-        self.textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.lightGray ,NSFontAttributeName: C.font!])
+//        self.textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.lightGray ,NSFontAttributeName: C.font!])
     }
     
     func setColorLight() {
         self.win.backgroundColor = C.colorLight
         self.textField.backgroundColor = C.colorLight
         self.textField.textColor = NSColor.gray
-        self.textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.font!])
+//        self.textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.font!])
     }
     
     func toggleTitlebar() {
@@ -77,7 +67,7 @@ class Document: NSDocument {
     
     override func data(ofType typeName: String) throws -> Data {
         // Return stringValue & encode using utf8 encoding
-        return textField.stringValue.data(using: String.Encoding.utf8, allowLossyConversion: false)!
+        return textField.string!.data(using: String.Encoding.utf8, allowLossyConversion: false)!
     }
     
     override func read(from data: Data, ofType typeName: String) throws {

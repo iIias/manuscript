@@ -11,6 +11,8 @@
 			<array>
 				<string>txt</string>
 			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string></string>
 			<key>CFBundleTypeName</key>
 			<string>Text</string>
 			<key>CFBundleTypeOSTypes</key>
