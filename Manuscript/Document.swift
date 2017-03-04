@@ -7,8 +7,10 @@
 //
 
 import Cocoa
+import Foundation
+import AppKit
 
-class Document: NSDocument {
+class Document: NSDocument, NSTextViewDelegate, NSTextDelegate {
     
     @IBOutlet var win: NSWindow!
     @IBOutlet weak var scrollView: NSScrollView!
@@ -24,7 +26,11 @@ class Document: NSDocument {
     
     override func windowControllerDidLoadNib(_ aController: NSWindowController) {
         super.windowControllerDidLoadNib(aController)
+        textField.delegate = self
+        let noti = NotificationCenter.default
+        noti.addObserver(self, selector: #selector(NSTextDelegate.textDidChange(_:)), name: NSNotification.Name.NSControlTextDidChange, object: textField)
         placeholder = placeholderList[randomInt]
+        scrollView.verticalScroller = .none
         win.titlebarAppearsTransparent = true
         win.isMovableByWindowBackground = true
         win.backgroundColor = C.colorLight
@@ -41,6 +47,33 @@ class Document: NSDocument {
             //: set colors to light
             setColorLight()
         }
+    }
+    
+    func textDidChange(_ notification: Notification) {
+        if (textField.string?.contains("#"))! {
+              }
+    }
+
+    func tweetText() {
+        if (textField.string?.characters.count)! < 140 {
+            let text: String = textField.string!
+            let linkText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+//            let linkText = text.replacingOccurrences(of: " ", with: "%20")
+            let url = NSURL(string: "http://twitter.com/home?status=\(linkText)")
+            NSWorkspace.shared().open(url as! URL)
+        } else {
+            // I'm sorry but Jack Dorsey is afraid of text that has more than 140 characters. 😬
+            _ = dialogOK(question: "We're sorry, your Tweet is too long 😔", text: "Twitter only supports 140 characters per tweet.")
+        }
+    }
+    
+    func dialogOK(question: String, text: String) -> Bool {
+        let myPopup: NSAlert = NSAlert()
+        myPopup.messageText = question
+        myPopup.informativeText = text
+        myPopup.alertStyle = NSAlertStyle.warning
+        myPopup.addButton(withTitle: "OK")
+        return myPopup.runModal() == NSAlertFirstButtonReturn
     }
     
     func setColorDark() {
@@ -71,7 +104,7 @@ class Document: NSDocument {
     }
     
     override func read(from data: Data, ofType typeName: String) throws {
-        if data.count > 0 {
+        if data.isEmpty { } else {
             self.contents = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as String!
         }
         
