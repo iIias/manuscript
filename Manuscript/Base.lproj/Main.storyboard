@@ -597,6 +597,10 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Share" id="4Wm-PY-7mv">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Share" id="LgU-6v-DEd"/>
+                            </menuItem>
                             <menuItem title="Help" id="wpr-3q-Mcd">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
@@ -622,6 +626,7 @@
                         <outlet property="helpMenu" destination="F2S-fz-NVQ" id="hlA-4I-JJG"/>
                         <outlet property="mainMenu" destination="AYu-sK-qS6" id="1h0-78-Eal"/>
                         <outlet property="menu" destination="uQy-DD-JDr" id="j9g-dO-e6A"/>
+                        <outlet property="shareMenu" destination="LgU-6v-DEd" id="D9D-yA-FZF"/>
                         <outlet property="styleMenu" destination="GEO-Iw-cKr" id="Pqh-WU-lYC"/>
                         <outlet property="windowMenu" destination="Td7-aD-5lo" id="VW5-ia-uYR"/>
                     </connections>

@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var editMenu: NSMenu!
     @IBOutlet weak var styleMenu: NSMenu!
     @IBOutlet weak var windowMenu: NSMenu!
+    @IBOutlet weak var shareMenu: NSMenu!
     @IBOutlet weak var helpMenu: NSMenu!
     
     let ud = UserDefaults.standard
@@ -30,6 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         windowMenu.addItem(NSMenuItem(title: "💡 Light", action: #selector(Document().setColorLight), keyEquivalent: "L"))
         windowMenu.addItem(NSMenuItem(title: "🌚 Dark", action: #selector(Document().setColorDark), keyEquivalent: "N"))
         windowMenu.addItem(NSMenuItem(title: "😉 Emojis", action: #selector(toggleEmojis), keyEquivalent: "E"))
+        shareMenu.addItem(NSMenuItem(title: "🐦 Tweet", action: #selector(Document().tweetText), keyEquivalent: ""))
     }
     
     func toggleEmojis() {
