@@ -50,8 +50,8 @@ class Document: NSDocument, NSTextViewDelegate, NSTextDelegate {
     }
     
     func textDidChange(_ notification: Notification) {
+        var allText: String = textField.string!
         var wordCount = (textField.string?.characters.filter { $0 == " " }.count)! + 1
-        dump(wordCount)
         if (textField.string?.contains("#"))! {
               }
     }

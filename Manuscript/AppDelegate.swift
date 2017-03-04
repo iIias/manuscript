@@ -17,12 +17,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var menu: NSMenu!
     @IBOutlet weak var fileMenu: NSMenu!
     @IBOutlet weak var editMenu: NSMenu!
-    @IBOutlet weak var styleMenu: NSMenu!
     @IBOutlet weak var windowMenu: NSMenu!
     @IBOutlet weak var shareMenu: NSMenu!
     @IBOutlet weak var helpMenu: NSMenu!
     
     let ud = UserDefaults.standard
+    @IBOutlet weak var textMenu: NSMenu!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Initialize application
@@ -39,21 +39,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             ud.set("emoji", forKey: "menubarStyle")
             self.fileMenu.title = "📄"
             self.editMenu.title = "✍️"
-            self.styleMenu.title = "🔥"
             self.windowMenu.title = "🖼"
             self.helpMenu.title = "🤦‍♂️"
         } else if ud.string(forKey: "menubarStyle") == "emoji" {
             ud.set("standard", forKey: "menubarStyle")
             self.fileMenu.title = "File"
             self.editMenu.title = "Edit"
-            self.styleMenu.title = "Style"
             self.windowMenu.title = "Window"
             self.helpMenu.title = "Help"
         } else /*if defaults.string(forKey: "menubarStyle") == "emoji"*/ {
             self.ud.set("emoji", forKey: "menubarStyle")
             self.fileMenu.title = "📄"
             self.editMenu.title = "✍️"
-            self.styleMenu.title = "🔥"
             self.windowMenu.title = "🖼"
             self.helpMenu.title = "🤦‍♂️"
         }
