@@ -22,13 +22,13 @@ class Document: NSDocument {
     }
     
     override func windowControllerDidLoadNib(_ aController: NSWindowController) {
+        super.windowControllerDidLoadNib(aController)
         if #available(OSX 10.12.2, *) {
             textField.allowsCharacterPickerTouchBarItem = true
         } else {
             // Fallback on earlier versions
         }
         placeholder = placeholderList[randomInt]
-        super.windowControllerDidLoadNib(aController)
         win.titlebarAppearsTransparent = true
         win.isMovableByWindowBackground = true
         win.backgroundColor = C.colorLight
@@ -36,7 +36,6 @@ class Document: NSDocument {
         textField.isEditable = true
         textField.focusRingType = .none
         textField.placeholderAttributedString = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: NSColor.gray, NSFontAttributeName: C.font!])
-        win.isOpaque = false
         textField.stringValue = contents as String
         // Check whether macOS is set to dark or light
         let appearance = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") ?? "Light"; dump("Manuscript appearance set to \(appearance) 🌇")
@@ -47,6 +46,11 @@ class Document: NSDocument {
             //: set colors to light
             setColorLight()
         }
+    }
+    
+    @IBAction func textFieldAction(_ sender: NSTextField) {
+        self.textField.stringValue.append("\n")
+        self.textField?.selectAll(nil)
     }
     
     func setColorDark() {
