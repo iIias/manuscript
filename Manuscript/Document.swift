@@ -40,6 +40,20 @@ class Document: NSDocument, NSTextViewDelegate {
         win.isMovableByWindowBackground = true
         scrollView.verticalScroller = .none
         
+        if AppDelegate().ud.string(forKey: "manuscriptCounters") == "countersHidden" {
+            wordCountLabel.isHidden = true
+            characterCountLabel.isHidden = true
+        } else if AppDelegate().ud.string(forKey: "manuscriptCounters") == "countersShown" {
+            wordCountLabel.isHidden = false
+            characterCountLabel.isHidden = false
+        }
+        
+        if AppDelegate().ud.string(forKey: "manuscriptTitlebar") == "titlebarHidden" {
+            win.titlebarAppearsTransparent = true
+        } else if AppDelegate().ud.string(forKey: "manuscriptCounters") == "titlebarShown" {
+            win.titlebarAppearsTransparent = false
+        }
+        
         setColorLight()
         
         textField.string = contents as String
@@ -70,6 +84,11 @@ class Document: NSDocument, NSTextViewDelegate {
         } else {
             _ = dialogOK(question: "We're sorry, your Tweet is too long 😔", text: "Twitter only supports 140 characters per tweet by now.")
         }
+    }
+    
+    func emailText() {
+        let service = NSSharingService(named: NSSharingServiceNameComposeEmail)!
+        service.perform(withItems: [textField.string!])
     }
     
     func dialogOK(question: String, text: String) -> Bool {
@@ -103,9 +122,11 @@ class Document: NSDocument, NSTextViewDelegate {
     
     func toggleCounters() {
         if wordCountLabel.isHidden {
+            AppDelegate().ud.set("countersShown", forKey: "manuscriptCounters")
             wordCountLabel.isHidden = false
             characterCountLabel.isHidden = false
         } else {
+            AppDelegate().ud.set("countersHidden", forKey: "manuscriptCounters")
             wordCountLabel.isHidden = true
             characterCountLabel.isHidden = true
         }
@@ -113,8 +134,10 @@ class Document: NSDocument, NSTextViewDelegate {
     
     func toggleTitlebar() {
         if win.titlebarAppearsTransparent == true {
+            AppDelegate().ud.set("titlebarShown", forKey: "manuscriptTitlebar")
             win.titlebarAppearsTransparent = false
         } else {
+            AppDelegate().ud.set("titlebarHidden", forKey: "manuscriptTitlebar")
             win.titlebarAppearsTransparent = true
         }
     }
