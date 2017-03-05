@@ -3,20 +3,24 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="Manuscript" customModuleProvider="target">
             <connections>
+                <outlet property="characterCountLabel" destination="bRQ-n8-B3L" id="rWP-vY-7Zt"/>
                 <outlet property="scrollView" destination="b3z-nm-9R6" id="85t-Wi-iDz"/>
                 <outlet property="textField" destination="CSA-AM-lmC" id="DLG-7Q-Wpc"/>
+                <outlet property="webView" destination="qfo-yb-udE" id="eqV-TD-bZ7"/>
                 <outlet property="win" destination="xOd-HO-29H" id="uAi-qR-5Q6"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
+                <outlet property="wordCountLabel" destination="KFt-WU-I3L" id="pb6-Ua-hhI"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="xOd-HO-29H" userLabel="Window">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="xOd-HO-29H" userLabel="Window">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="133" y="235" width="567" height="391"/>
@@ -27,22 +31,22 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="0.0" horizontalPageScroll="0.0" verticalLineScroll="0.0" verticalPageScroll="0.0" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3z-nm-9R6">
-                        <rect key="frame" x="20" y="20" width="527" height="351"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <rect key="frame" x="20" y="25" width="527" height="346"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" ambiguous="YES" id="qKY-SR-5Eg">
-                            <rect key="frame" x="0.0" y="0.0" width="527" height="351"/>
+                            <rect key="frame" x="0.0" y="0.0" width="527" height="346"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView autoresizesSubviews="NO" ambiguous="YES" importsGraphics="NO" richText="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="CSA-AM-lmC">
-                                    <rect key="frame" x="0.0" y="0.0" width="529" height="351"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="529" height="346"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="527" height="351"/>
+                                    <size key="minSize" width="527" height="346"/>
                                     <size key="maxSize" width="533" height="10000000"/>
                                     <attributedString key="textStorage">
                                         <fragment content="Hello world!">
                                             <attributes>
-                                                <font key="NSFont" size="23" name="AvenirNext-Regular"/>
+                                                <font key="NSFont" size="23" name="SFMono-Regular"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                             </attributes>
                                         </fragment>
@@ -57,10 +61,35 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="3ex-C8-zgX">
-                            <rect key="frame" x="511" y="0.0" width="16" height="351"/>
+                            <rect key="frame" x="511" y="0.0" width="16" height="346"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFt-WU-I3L">
+                        <rect key="frame" x="18" y="6" width="97" height="17"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Words: 0" id="5sm-gX-jqe">
+                            <font key="font" size="13" name="SFMono-Regular"/>
+                            <color key="textColor" red="0.33715187823834192" green="0.33715187823834192" blue="0.33715187823834192" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRQ-n8-B3L">
+                        <rect key="frame" x="119" y="6" width="170" height="17"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Characters: 0" id="FbU-x1-1ig">
+                            <font key="font" size="13" name="SFMono-Regular"/>
+                            <color key="textColor" red="0.33715187819999998" green="0.33715187819999998" blue="0.33715187819999998" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <webView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qfo-yb-udE">
+                        <rect key="frame" x="293" y="25" width="254" height="346"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <webPreferences key="preferences" defaultFontSize="16" defaultFixedFontSize="13" minimumFontSize="0">
+                            <nil key="identifier"/>
+                        </webPreferences>
+                    </webView>
                 </subviews>
             </view>
             <connections>
