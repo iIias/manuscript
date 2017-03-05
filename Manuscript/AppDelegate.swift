@@ -31,6 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         windowMenu.addItem(NSMenuItem(title: "🌚 Dark", action: #selector(Document().setColorDark), keyEquivalent: "N"))
         windowMenu.addItem(NSMenuItem(title: "📟 Toggle Word & Char Counter", action: #selector(Document().toggleCounters), keyEquivalent: ""))
         shareMenu.addItem(NSMenuItem(title: "🐦 Tweet", action: #selector(Document().tweetText), keyEquivalent: ""))
+        shareMenu.addItem(NSMenuItem(title: "✉️ Mail", action: #selector(Document().emailText), keyEquivalent: ""))
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
