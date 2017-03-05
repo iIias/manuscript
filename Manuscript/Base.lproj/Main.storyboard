@@ -346,7 +346,8 @@
                                                 <action selector="performMiniaturize:" target="Ady-hI-5gd" id="VwT-WD-YPe"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="➕ Zoom" keyEquivalent="Z" id="R4o-n2-Eq4">
+                                        <menuItem title="➕ Zoom" id="R4o-n2-Eq4">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
                                             </connections>
@@ -354,10 +355,6 @@
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                                     </items>
                                 </menu>
-                            </menuItem>
-                            <menuItem title="Text" id="aP4-1s-RCO">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Text" id="kND-9E-Hs9"/>
                             </menuItem>
                             <menuItem title="Share" id="4Wm-PY-7mv">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -389,7 +386,6 @@
                         <outlet property="mainMenu" destination="AYu-sK-qS6" id="1h0-78-Eal"/>
                         <outlet property="menu" destination="uQy-DD-JDr" id="j9g-dO-e6A"/>
                         <outlet property="shareMenu" destination="LgU-6v-DEd" id="D9D-yA-FZF"/>
-                        <outlet property="textMenu" destination="kND-9E-Hs9" id="lNp-we-hVR"/>
                         <outlet property="windowMenu" destination="Td7-aD-5lo" id="VW5-ia-uYR"/>
                     </connections>
                 </customObject>
