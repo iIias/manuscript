@@ -31,13 +31,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         windowMenu.addItem(NSMenuItem(title: "🌚 Dark", action: #selector(Document().setColorDark), keyEquivalent: "N"))
         windowMenu.addItem(NSMenuItem(title: "📟 Toggle Word & Char Counter", action: #selector(Document().toggleCounters), keyEquivalent: ""))
         shareMenu.addItem(NSMenuItem(title: "🐦 Tweet", action: #selector(Document().tweetText), keyEquivalent: ""))
-        shareMenu.addItem(NSMenuItem(title: "✉️ Mail", action: #selector(Document().emailText), keyEquivalent: ""))
+        shareMenu.addItem(NSMenuItem(title: "✉️ Mail", action: #selector(Document().mailText), keyEquivalent: ""))
+        helpMenu.addItem(NSMenuItem.separator())
+        helpMenu.addItem(NSMenuItem(title: "👨🏽‍💻 Support Mail", action: #selector(supportMail), keyEquivalent: ""))
+        helpMenu.addItem(NSMenuItem(title: "📰 Press Mail", action: #selector(pressMail), keyEquivalent: ""))
+    }
+    
+    func supportMail() {
+        let service = NSSharingService(named: NSSharingServiceNameComposeEmail)!
+        let process = ProcessInfo.processInfo
+        service.recipients = ["support@manuscript.tools"]
+        service.subject = "Support request"
+        service.perform(withItems: ["Please don't remove the following lines and write your request below them \n\(process.operatingSystemVersionString)\n\(process.systemUptime)\n ---------->"])
+    }
+    
+    func pressMail() {
+        let service = NSSharingService(named: NSSharingServiceNameComposeEmail)!
+        service.recipients = ["yourfriends@manuscript.tools"]
+        service.perform(withItems: [""])
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-
 
 }
 
