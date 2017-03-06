@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Foundation
 import WebKit
 
 class Document: NSDocument, NSTextViewDelegate {
@@ -73,9 +74,35 @@ class Document: NSDocument, NSTextViewDelegate {
 
     func textDidChange(_ notification: Notification) {
         updateCounter()
+        if let piRange = textField.string!.range(of: "*pi*") {
+            textField.string!.replaceSubrange(piRange, with: "3.14159265359")
+        }
+        if let darkRange = textField.string!.range(of: "/dark-mode") {
+            setColorDark()
+            textField.string!.replaceSubrange(darkRange, with: "")
+        }
+        if let lightRange = textField.string!.range(of: "/light-mode") {
+            setColorLight()
+            textField.string!.replaceSubrange(lightRange, with: "")
+        }
+        if let titlebarRange = textField.string!.range(of: "/toggle-titlebar") {
+            toggleTitlebar()
+            textField.string!.replaceSubrange(titlebarRange, with: "")
+        }
+        if let countersRange = textField.string!.range(of: "/toggle-counters") {
+            toggleCounters()
+            textField.string!.replaceSubrange(countersRange, with: "")
+        }
+        if let twitterRange = textField.string!.range(of: "/send-tweet") {
+            textField.string!.replaceSubrange(twitterRange, with: "")
+            tweetText()
+        }
+        if let mailRange = textField.string!.range(of: "/send-mail") {
+            textField.string!.replaceSubrange(mailRange, with: "")
+            mailText()
+        }
    }
     
-
     func tweetText() {
         if (textField.string?.characters.count)! < 140 {
             let linkText = textField.string!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
@@ -86,7 +113,7 @@ class Document: NSDocument, NSTextViewDelegate {
         }
     }
     
-    func emailText() {
+    func mailText() {
         let service = NSSharingService(named: NSSharingServiceNameComposeEmail)!
         service.perform(withItems: [textField.string!])
     }
@@ -111,12 +138,18 @@ class Document: NSDocument, NSTextViewDelegate {
         self.win.backgroundColor = NSColor.black
         self.textField.backgroundColor = NSColor.black
         self.textField.textColor = C.colorLight
+        self.characterCountLabel.textColor = C.colorLight
+        self.wordCountLabel.textColor = C.colorLight
+        self.textField.font = C.font
     }
     
     func setColorLight() {
         self.win.backgroundColor = C.colorLight
         self.textField.backgroundColor = C.colorLight
         self.textField.textColor = NSColor.darkGray
+        self.textField.textColor = NSColor.darkGray
+        self.characterCountLabel.textColor = NSColor.darkGray
+        self.wordCountLabel.textColor = NSColor.darkGray
         self.textField.font = C.font
     }
     

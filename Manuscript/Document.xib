@@ -46,7 +46,7 @@
                                     <attributedString key="textStorage">
                                         <fragment content="Hello world!">
                                             <attributes>
-                                                <font key="NSFont" size="23" name="SFMono-Regular"/>
+                                                <font key="NSFont" size="23" name="Avenir-Book"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                             </attributes>
                                         </fragment>
