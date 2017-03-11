@@ -17,21 +17,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var menu: NSMenu!
     @IBOutlet weak var fileMenu: NSMenu!
     @IBOutlet weak var editMenu: NSMenu!
-    @IBOutlet weak var windowMenu: NSMenu!
-    @IBOutlet weak var shareMenu: NSMenu!
     @IBOutlet weak var helpMenu: NSMenu!
         
     let ud = UserDefaults.standard
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Initialize application
-        windowMenu.addItem(NSMenuItem.separator())
-        windowMenu.addItem(NSMenuItem(title: "👁 Toggle Titlebar", action: #selector(Document().toggleTitlebar), keyEquivalent: "T"))
-        windowMenu.addItem(NSMenuItem(title: "💡 Light", action: #selector(Document().setColorLight), keyEquivalent: "L"))
-        windowMenu.addItem(NSMenuItem(title: "🌚 Dark", action: #selector(Document().setColorDark), keyEquivalent: "N"))
-        windowMenu.addItem(NSMenuItem(title: "📟 Toggle Word & Char Counter", action: #selector(Document().toggleCounters), keyEquivalent: ""))
-        shareMenu.addItem(NSMenuItem(title: "🐦 Tweet", action: #selector(Document().tweetText), keyEquivalent: ""))
-        shareMenu.addItem(NSMenuItem(title: "✉️ Mail", action: #selector(Document().mailText), keyEquivalent: ""))
         helpMenu.addItem(NSMenuItem.separator())
         helpMenu.addItem(NSMenuItem(title: "👨🏽‍💻 Support Mail", action: #selector(supportMail), keyEquivalent: ""))
         helpMenu.addItem(NSMenuItem(title: "📰 Press Mail", action: #selector(pressMail), keyEquivalent: ""))

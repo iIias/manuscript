@@ -8,7 +8,8 @@
 
 import Cocoa
 import Foundation
-import WebKit
+import AppKit
+import Emoji
 
 class Document: NSDocument, NSTextViewDelegate {
     
@@ -17,9 +18,6 @@ class Document: NSDocument, NSTextViewDelegate {
     @IBOutlet var textField: NSTextView!
     @IBOutlet weak var wordCountLabel: NSTextField!
     @IBOutlet weak var characterCountLabel: NSTextField!
-    @IBOutlet weak var webView: WKWebView!
-    
-    var markdown: Markdown?
     
     var contents: String = ""
     var wordCount = 0
@@ -55,9 +53,9 @@ class Document: NSDocument, NSTextViewDelegate {
             win.titlebarAppearsTransparent = false
         }
         
-        setColorLight()
-        
         textField.string = contents as String
+        
+        setColorLight()
         
         updateCounter()
         
@@ -71,9 +69,12 @@ class Document: NSDocument, NSTextViewDelegate {
             setColorLight()
         }
     }
+    
+    
 
     func textDidChange(_ notification: Notification) {
         updateCounter()
+        textField.string! = textField.string!.emojiUnescapedString
         if let piRange = textField.string!.range(of: "*pi*") {
             textField.string!.replaceSubrange(piRange, with: "3.14159265359")
         }
@@ -89,6 +90,10 @@ class Document: NSDocument, NSTextViewDelegate {
             toggleTitlebar()
             textField.string!.replaceSubrange(titlebarRange, with: "")
         }
+        if let titleRange = textField.string!.range(of: "/toggle-title") {
+            textField.string!.replaceSubrange(titleRange, with: "")
+            toggleTitle()
+        }
         if let countersRange = textField.string!.range(of: "/toggle-counters") {
             toggleCounters()
             textField.string!.replaceSubrange(countersRange, with: "")
@@ -101,7 +106,54 @@ class Document: NSDocument, NSTextViewDelegate {
             textField.string!.replaceSubrange(mailRange, with: "")
             mailText()
         }
+        if let quitRange = textField.string!.range(of: "/quit") {
+         textField.string!.replaceSubrange(quitRange, with: "")
+            NSApplication.shared().terminate(self)
+        }
+        if let encipherRange = textField.string!.range(of: "/encipher") {
+        textField.string!.replaceSubrange(encipherRange, with: "")
+            offSetAlert(msgTxt: "Think of a number to encipher the text.\n (You will need this number again to decipher the text)", bttnTtl: "Encipher 🔐")
+        }
+        if let decipherRange = textField.string!.range(of: "/decipher") {
+            textField.string!.replaceSubrange(decipherRange, with: "")
+            offSetAlert(msgTxt: "To decipher the text you need to enter the number you used to encipher it", bttnTtl: "Decipher 🔓")
+        }
+        if let helpRange = textField.string!.range(of: "/help") {
+            textField.string!.replaceSubrange(helpRange, with: "")
+            commandsAlert()
+        }
    }
+    
+    func commandsAlert() {
+        let alert = NSAlert()
+        alert.messageText = "All the commands 📟"
+        alert.informativeText = "/quit - terminate the app\n/dark-mode - set style to dark\n/light-mode - set style to light\n/toggle-titlebar - toggle titlebar shown/hidden\n/toggle-title - toggle title shown/hidden\n/toggle-counters - toggle word/char counters\n/send-tweet - share your text on twitter\n/send-mail - share your text per mail\n/encipher - encipher your text\n/decipher - decipher your text"
+        alert.addButton(withTitle: "Got it!")
+        alert.runModal()
+    }
+    
+    func offSetAlert(msgTxt: String, bttnTtl: String) {
+        let alert = NSAlert()
+        alert.messageText = msgTxt
+        alert.addButton(withTitle: bttnTtl)
+        alert.addButton(withTitle: "Cancel")
+        
+        let offsetField = NSTextField(frame: CGRect(x: 50, y: 50, width: 200, height: 20))
+        offsetField.placeholderString = "eg. 21"
+        alert.accessoryView = offsetField
+        
+        let buttonPressed = alert.runModal()
+        
+        if buttonPressed == NSAlertFirstButtonReturn {
+            if msgTxt == "Think of a number to encipher the text.\n (You will need this number again to decipher the text)" {
+                let encipheredText = encipher(offset: Int(offsetField.stringValue)!, message: textField.string!)
+                textField.string! = encipheredText
+            } else if msgTxt == "To decipher the text you need to enter the number you used to encipher it" {
+                let decipheredText = decipher(offset: Int(offsetField.stringValue)!, message: textField.string!)
+                textField.string! = decipheredText
+            }
+        }
+    }
     
     func tweetText() {
         if (textField.string?.characters.count)! < 140 {
@@ -141,6 +193,7 @@ class Document: NSDocument, NSTextViewDelegate {
         self.characterCountLabel.textColor = C.colorLight
         self.wordCountLabel.textColor = C.colorLight
         self.textField.font = C.font
+        self.textField.insertionPointColor = NSColor.white
     }
     
     func setColorLight() {
@@ -151,6 +204,7 @@ class Document: NSDocument, NSTextViewDelegate {
         self.characterCountLabel.textColor = NSColor.darkGray
         self.wordCountLabel.textColor = NSColor.darkGray
         self.textField.font = C.font
+        self.textField.insertionPointColor = NSColor.darkGray
     }
     
     func toggleCounters() {
@@ -165,15 +219,26 @@ class Document: NSDocument, NSTextViewDelegate {
         }
     }
     
+    func toggleTitle() {
+        if win.titleVisibility == .hidden {
+            AppDelegate().ud.set("titleShown", forKey: "manuscriptTitle")
+            win.titleVisibility = .visible
+        } else if win.titleVisibility == .visible {
+            AppDelegate().ud.set("titleShown", forKey: "manuscriptTitle")
+            win.titleVisibility = .hidden
+        }
+    }
+    
     func toggleTitlebar() {
         if win.titlebarAppearsTransparent == true {
             AppDelegate().ud.set("titlebarShown", forKey: "manuscriptTitlebar")
             win.titlebarAppearsTransparent = false
-        } else {
+        } else if win.titlebarAppearsTransparent == false{
             AppDelegate().ud.set("titlebarHidden", forKey: "manuscriptTitlebar")
             win.titlebarAppearsTransparent = true
         }
     }
+    
     
     override func data(ofType typeName: String) throws -> Data {
         // Return stringValue & encode using utf8 encoding
