@@ -14,9 +14,26 @@
 		68C9574E1E59E1AF0051C646 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C9574C1E59E1AF0051C646 /* Main.storyboard */; };
 		68DDF5B51E5CBDC30000ED17 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DDF5B31E5CBDC30000ED17 /* Document.swift */; };
 		68DDF5B61E5CBDC30000ED17 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68DDF5B41E5CBDC30000ED17 /* Document.xib */; };
+		68E1AFED1E76F180004317F6 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AFEC1E76F180004317F6 /* EventMonitor.swift */; };
+		68E1AFF41E76F77D004317F6 /* popupDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E1AFF21E76F77D004317F6 /* popupDocument.swift */; };
+		68E1AFF51E76F77D004317F6 /* popupDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68E1AFF31E76F77D004317F6 /* popupDocument.xib */; };
+		68E1AFF71E76FEDC004317F6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E1AFF61E76FEDC004317F6 /* CloudKit.framework */; };
 		68F0F5991E71E8360025D636 /* Algorithms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F0F5981E71E8360025D636 /* Algorithms.swift */; };
 		C3DDCC7FC9DA53C96A00F996 /* Pods_Manuscript__.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C673F8E01E0E9A0826FB5D97 /* Pods_Manuscript__.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		68E1AFCD1E75A98A004317F6 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		685A36D61E207241003D75A8 /* Manuscript++.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Manuscript++.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,6 +45,11 @@
 		68C9574D1E59E1AF0051C646 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		68DDF5B31E5CBDC30000ED17 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; usesTabs = 0; };
 		68DDF5B41E5CBDC30000ED17 /* Document.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Document.xib; sourceTree = "<group>"; };
+		68E1AFD31E75A9ED004317F6 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		68E1AFEC1E76F180004317F6 /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		68E1AFF21E76F77D004317F6 /* popupDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = popupDocument.swift; sourceTree = "<group>"; };
+		68E1AFF31E76F77D004317F6 /* popupDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = popupDocument.xib; sourceTree = "<group>"; };
+		68E1AFF61E76FEDC004317F6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		68EE4EC51E6E26060005370A /* Manuscript.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Manuscript.entitlements; sourceTree = "<group>"; };
 		68F0F5981E71E8360025D636 /* Algorithms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Algorithms.swift; sourceTree = "<group>"; };
 		93DA00FE9CD16BE3B331B4AF /* Pods-Manuscript++.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manuscript++.release.xcconfig"; path = "Pods/Target Support Files/Pods-Manuscript++/Pods-Manuscript++.release.xcconfig"; sourceTree = "<group>"; };
@@ -41,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3DDCC7FC9DA53C96A00F996 /* Pods_Manuscript__.framework in Frameworks */,
+				68E1AFF71E76FEDC004317F6 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,7 +73,9 @@
 		2113188974E5F1E7D0A915A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68E1AFF61E76FEDC004317F6 /* CloudKit.framework */,
 				C673F8E01E0E9A0826FB5D97 /* Pods_Manuscript__.framework */,
+				68E1AFD31E75A9ED004317F6 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -76,18 +101,53 @@
 		685A36D81E207241003D75A8 /* Manuscript */ = {
 			isa = PBXGroup;
 			children = (
-				68EE4EC51E6E26060005370A /* Manuscript.entitlements */,
-				68DDF5B41E5CBDC30000ED17 /* Document.xib */,
-				68C9574C1E59E1AF0051C646 /* Main.storyboard */,
-				685A36D91E207241003D75A8 /* AppDelegate.swift */,
-				68F0F5981E71E8360025D636 /* Algorithms.swift */,
-				68DDF5B31E5CBDC30000ED17 /* Document.swift */,
-				685B17AB1E2A81250099733F /* C.swift */,
+				68E1AFFA1E77006A004317F6 /* Main */,
+				68E1AFFB1E770084004317F6 /* Document */,
+				68E1AFF91E770048004317F6 /* Cryptography */,
+				68E1AFF81E770038004317F6 /* Popover */,
 				685A36DD1E207241003D75A8 /* Assets.xcassets */,
 				685ACF081E70746B00E83F02 /* OpenSans-Regular.ttf */,
 				685A36E21E207241003D75A8 /* Info.plist */,
 			);
 			path = Manuscript;
+			sourceTree = "<group>";
+		};
+		68E1AFF81E770038004317F6 /* Popover */ = {
+			isa = PBXGroup;
+			children = (
+				68E1AFEC1E76F180004317F6 /* EventMonitor.swift */,
+				68E1AFF31E76F77D004317F6 /* popupDocument.xib */,
+				68E1AFF21E76F77D004317F6 /* popupDocument.swift */,
+			);
+			name = Popover;
+			sourceTree = "<group>";
+		};
+		68E1AFF91E770048004317F6 /* Cryptography */ = {
+			isa = PBXGroup;
+			children = (
+				68F0F5981E71E8360025D636 /* Algorithms.swift */,
+			);
+			name = Cryptography;
+			sourceTree = "<group>";
+		};
+		68E1AFFA1E77006A004317F6 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				68EE4EC51E6E26060005370A /* Manuscript.entitlements */,
+				685A36D91E207241003D75A8 /* AppDelegate.swift */,
+				68C9574C1E59E1AF0051C646 /* Main.storyboard */,
+				685B17AB1E2A81250099733F /* C.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		68E1AFFB1E770084004317F6 /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				68DDF5B41E5CBDC30000ED17 /* Document.xib */,
+				68DDF5B31E5CBDC30000ED17 /* Document.swift */,
+			);
+			name = Document;
 			sourceTree = "<group>";
 		};
 		EF395104FC1212548895D9CC /* Pods */ = {
@@ -112,6 +172,7 @@
 				685A36D41E207241003D75A8 /* Resources */,
 				3ECFC96D4202347B3A9B6222 /* [CP] Embed Pods Frameworks */,
 				966563BB2E5D972EFB5DE4F8 /* [CP] Copy Pods Resources */,
+				68E1AFCD1E75A98A004317F6 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -137,6 +198,9 @@
 						DevelopmentTeam = AUHLTS98UR;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
 							com.apple.Sandbox = {
 								enabled = 1;
 							};
@@ -174,6 +238,7 @@
 				685A36DE1E207241003D75A8 /* Assets.xcassets in Resources */,
 				685ACF091E70746B00E83F02 /* OpenSans-Regular.ttf in Resources */,
 				68C9574E1E59E1AF0051C646 /* Main.storyboard in Resources */,
+				68E1AFF51E76F77D004317F6 /* popupDocument.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,9 +298,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				68DDF5B51E5CBDC30000ED17 /* Document.swift in Sources */,
+				68E1AFED1E76F180004317F6 /* EventMonitor.swift in Sources */,
 				68F0F5991E71E8360025D636 /* Algorithms.swift in Sources */,
 				685B17AC1E2A81250099733F /* C.swift in Sources */,
 				685A36DA1E207241003D75A8 /* AppDelegate.swift in Sources */,
+				68E1AFF41E76F77D004317F6 /* popupDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,7 +360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -336,7 +403,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

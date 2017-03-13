@@ -10,19 +10,20 @@ import Cocoa
 import Foundation
 import AppKit
 import Emoji
+import WebKit
 
 class Document: NSDocument, NSTextViewDelegate {
     
     @IBOutlet var win: NSWindow!
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet var textField: NSTextView!
-    @IBOutlet weak var wordCountLabel: NSTextField!
     @IBOutlet weak var characterCountLabel: NSTextField!
     
     var contents: String = ""
-    var wordCount = 0
     var characterCount = 0
-    
+    var wordCount = 0
+    var readtime = 0
+    var readtimeString = ""
     
     override var windowNibName: String? {
         return "Document"
@@ -30,20 +31,22 @@ class Document: NSDocument, NSTextViewDelegate {
     
     override func windowControllerDidLoadNib(_ aController: NSWindowController) {
         super.windowControllerDidLoadNib(aController)
-        textField.delegate = self
         
-        let noti = NotificationCenter.default
-        noti.addObserver(self, selector: #selector(NSTextDelegate.textDidChange(_:)), name: NSNotification.Name.NSControlTextDidChange, object: textField)
+        textField.delegate = self
         
         win.titlebarAppearsTransparent = true
         win.isMovableByWindowBackground = true
         scrollView.verticalScroller = .none
         
-        if AppDelegate().ud.string(forKey: "manuscriptCounters") == "countersHidden" {
-            wordCountLabel.isHidden = true
+        if AppDelegate().ud.string(forKey: "manuscriptStyle") == "dark" {
+            setColorDark()
+        } else if AppDelegate().ud.string(forKey: "manuscriptStyle") == "light" {
+            setColorLight()
+        }
+        
+        if AppDelegate().ud.string(forKey: "manuscriptToolbar") == "toolbarHidden" {
             characterCountLabel.isHidden = true
-        } else if AppDelegate().ud.string(forKey: "manuscriptCounters") == "countersShown" {
-            wordCountLabel.isHidden = false
+        } else if AppDelegate().ud.string(forKey: "manuscriptToolbar") == "toolbarShown" {
             characterCountLabel.isHidden = false
         }
         
@@ -79,20 +82,16 @@ class Document: NSDocument, NSTextViewDelegate {
             textField.string!.replaceSubrange(piRange, with: "3.14159265359")
         }
         if let darkRange = textField.string!.range(of: "/dark-mode") {
-            setColorDark()
             textField.string!.replaceSubrange(darkRange, with: "")
+            setColorDark()
         }
         if let lightRange = textField.string!.range(of: "/light-mode") {
-            setColorLight()
             textField.string!.replaceSubrange(lightRange, with: "")
+            setColorLight()
         }
         if let titlebarRange = textField.string!.range(of: "/toggle-titlebar") {
             toggleTitlebar()
             textField.string!.replaceSubrange(titlebarRange, with: "")
-        }
-        if let titleRange = textField.string!.range(of: "/toggle-title") {
-            textField.string!.replaceSubrange(titleRange, with: "")
-            toggleTitle()
         }
         if let countersRange = textField.string!.range(of: "/toggle-counters") {
             toggleCounters()
@@ -100,11 +99,11 @@ class Document: NSDocument, NSTextViewDelegate {
         }
         if let twitterRange = textField.string!.range(of: "/send-tweet") {
             textField.string!.replaceSubrange(twitterRange, with: "")
-            tweetText()
+            tweetText(text: textField.string!)
         }
         if let mailRange = textField.string!.range(of: "/send-mail") {
             textField.string!.replaceSubrange(mailRange, with: "")
-            mailText()
+            mailText(text: textField.string!)
         }
         if let quitRange = textField.string!.range(of: "/quit") {
          textField.string!.replaceSubrange(quitRange, with: "")
@@ -117,6 +116,9 @@ class Document: NSDocument, NSTextViewDelegate {
         if let decipherRange = textField.string!.range(of: "/decipher") {
             textField.string!.replaceSubrange(decipherRange, with: "")
             offSetAlert(msgTxt: "To decipher the text you need to enter the number you used to encipher it", bttnTtl: "Decipher 🔓")
+        }
+        if let saveRange = textField.string!.range(of: "/save") {
+            textField.string!.replaceSubrange(saveRange, with: "")
         }
         if let helpRange = textField.string!.range(of: "/help") {
             textField.string!.replaceSubrange(helpRange, with: "")
@@ -155,9 +157,9 @@ class Document: NSDocument, NSTextViewDelegate {
         }
     }
     
-    func tweetText() {
-        if (textField.string?.characters.count)! < 140 {
-            let linkText = textField.string!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+    func tweetText(text: String) {
+        if text.characters.count < 140 {
+            let linkText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
             let url = NSURL(string: "http://twitter.com/home?status=\(linkText)")
             NSWorkspace.shared().open(url as! URL)
         } else {
@@ -165,9 +167,9 @@ class Document: NSDocument, NSTextViewDelegate {
         }
     }
     
-    func mailText() {
+    func mailText(text: String) {
         let service = NSSharingService(named: NSSharingServiceNameComposeEmail)!
-        service.perform(withItems: [textField.string!])
+        service.perform(withItems: [text])
     }
     
     func dialogOK(question: String, text: String) -> Bool {
@@ -182,50 +184,44 @@ class Document: NSDocument, NSTextViewDelegate {
     func updateCounter() {
         wordCount = (textField.string!.characters.filter { $0 == " " }.count) + 1
         characterCount = textField.string!.characters.count
-        wordCountLabel.stringValue = "Words: \(wordCount)"
-        characterCountLabel.stringValue = "Characters: \(characterCount)"
+        if wordCount < 80 {
+            readtimeString = "< 1 min"
+        } else {
+            readtime = wordCount / 80
+            readtimeString = "\(readtime) min"
+        }
+        characterCountLabel.stringValue = "🔠 \(characterCount)     🕐 \(readtimeString)"
     }
     
     func setColorDark() {
+        AppDelegate().ud.set("dark", forKey: "manuscriptStyle")
         self.win.backgroundColor = NSColor.black
         self.textField.backgroundColor = NSColor.black
         self.textField.textColor = C.colorLight
         self.characterCountLabel.textColor = C.colorLight
-        self.wordCountLabel.textColor = C.colorLight
         self.textField.font = C.font
         self.textField.insertionPointColor = NSColor.white
     }
     
     func setColorLight() {
+        AppDelegate().ud.set("light", forKey: "manuscriptStyle")
         self.win.backgroundColor = C.colorLight
         self.textField.backgroundColor = C.colorLight
         self.textField.textColor = NSColor.darkGray
         self.textField.textColor = NSColor.darkGray
+        
         self.characterCountLabel.textColor = NSColor.darkGray
-        self.wordCountLabel.textColor = NSColor.darkGray
         self.textField.font = C.font
         self.textField.insertionPointColor = NSColor.darkGray
     }
     
     func toggleCounters() {
-        if wordCountLabel.isHidden {
-            AppDelegate().ud.set("countersShown", forKey: "manuscriptCounters")
-            wordCountLabel.isHidden = false
+        if characterCountLabel.isHidden {
+            AppDelegate().ud.set("toolbarShown", forKey: "manuscriptToolbar")
             characterCountLabel.isHidden = false
         } else {
-            AppDelegate().ud.set("countersHidden", forKey: "manuscriptCounters")
-            wordCountLabel.isHidden = true
+            AppDelegate().ud.set("toolbarHidden", forKey: "manuscriptToolbar")
             characterCountLabel.isHidden = true
-        }
-    }
-    
-    func toggleTitle() {
-        if win.titleVisibility == .hidden {
-            AppDelegate().ud.set("titleShown", forKey: "manuscriptTitle")
-            win.titleVisibility = .visible
-        } else if win.titleVisibility == .visible {
-            AppDelegate().ud.set("titleShown", forKey: "manuscriptTitle")
-            win.titleVisibility = .hidden
         }
     }
     

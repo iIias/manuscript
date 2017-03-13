@@ -3,7 +3,7 @@
 //  Manuscript++
 //
 //  Created by Lukas A. Mueller on 09.03.17.
-//  Copyright © 2017 Ilias Ennmouri. All rights reserved.
+//  Copyright © 2017 Lukas A. Mueller. All rights reserved.
 //
 
 
