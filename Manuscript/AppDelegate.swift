@@ -19,18 +19,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var fileMenu: NSMenu!
     @IBOutlet weak var editMenu: NSMenu!
     @IBOutlet weak var helpMenu: NSMenu!
-    
+
     let statusItem = NSStatusBar.system().statusItem(withLength: -2)
     let statusMenu = NSMenu()
     let writerPopover = NSPopover()
 
-    let version: String? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
-    
     let ud = UserDefaults.standard
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Initialize application
         NSApplication.shared()
+        helpMenu.addItem(NSMenuItem.separator())
+        helpMenu.addItem(NSMenuItem(title: "👨🏽‍💻 Support Mail", action: #selector(supportMail), keyEquivalent: ""))
+        helpMenu.addItem(NSMenuItem(title: "📰 Press Mail", action: #selector(pressMail), keyEquivalent: ""))
         NSApp.activate(ignoringOtherApps: true)
     }
     
@@ -39,7 +40,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let process = ProcessInfo.processInfo
         service.recipients = ["support@manuscript.tools"]
         service.subject = "Support request"
-        service.perform(withItems: ["Please don't remove the following lines and write your request below them \n\(process.operatingSystemVersionString)\n\(process.systemUptime)\n App Verision: \(version)\n ---------->"])
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+        service.perform(withItems: ["Please don't remove the following lines and write your request below them \n\(process.operatingSystemVersionString)\n\(process.systemUptime)\nApp Version: \(version)\n ---------->"])
+        }
     }
     
     func pressMail() {
