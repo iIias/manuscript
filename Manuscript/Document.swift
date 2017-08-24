@@ -63,14 +63,14 @@ class Document: NSDocument, NSTextViewDelegate {
         updateCounter()
         
         // Check whether macOS is set to dark or light
-        let appearance = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") ?? "Light"; dump("Manuscript appearance set to \(appearance) 🌇")
-        if appearance == "Dark" {
-            //: set colors to dark
-            setColorDark()
-        } else {
-            //: set colors to light
-            setColorLight()
-        }
+//        let appearance = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") ?? "Light"; dump("Manuscript appearance set to \(appearance) 🌇")
+//        if appearance == "Dark" {
+//            //: set colors to dark
+//            setColorDark()
+//        } else {
+//            //: set colors to light
+//            setColorLight()
+//        }
     }
     
     
@@ -81,11 +81,11 @@ class Document: NSDocument, NSTextViewDelegate {
         if let piRange = textField.string!.range(of: "*pi*") {
             textField.string!.replaceSubrange(piRange, with: "3.14159265359")
         }
-        if let darkRange = textField.string!.range(of: "/dark-mode") {
+        if let darkRange = textField.string!.range(of: "/dark") {
             textField.string!.replaceSubrange(darkRange, with: "")
             setColorDark()
         }
-        if let lightRange = textField.string!.range(of: "/light-mode") {
+        if let lightRange = textField.string!.range(of: "/light") {
             textField.string!.replaceSubrange(lightRange, with: "")
             setColorLight()
         }
