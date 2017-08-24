@@ -40,7 +40,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         helpMenu.addItem(NSMenuItem(title: "📰 Press Mail", action: #selector(pressMail), keyEquivalent: ""))
         statusMenu.addItem(NSMenuItem(title: "New Note ✍️", action: #selector(self.openWriterPopover(sender:)), keyEquivalent: ""))
         statusMenu.addItem(NSMenuItem.separator())
-        
         if let button = statusItem.button {
             button.title = "✍️"
             button.action = Selector(("togglePopover:"))
